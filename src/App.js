@@ -1,24 +1,34 @@
-import logo from './logo.svg';
 import './App.css';
+import Arweave from 'arweave';
+import { useState } from "react"
 
 function App() {
+  // Or manually specify a host
+  const arweave = Arweave.init({
+    host: '127.0.0.1',
+    port: 1984,
+    protocol: 'http'
+  });
+
+  const [wallet_address, setWalletAddress] = useState('')
+  arweave.wallets.generate().then((key) => {
+    console.log(key);
+    arweave.wallets.jwkToAddress(key).then((address) => {
+      console.log(address)
+      setWalletAddress(address)
+
+      arweave.wallets.getBalance(address).then((balance) => {
+        let winston = balance;
+        let ar = arweave.ar.winstonToAr(balance);
+        console.log(winston);
+        console.log(ar);
+      });
+
+    })
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div> **  {wallet_address} **</div>
   );
 }
 

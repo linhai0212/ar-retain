@@ -1,8 +1,8 @@
-import './App.css';
+
 import Arweave from 'arweave';
 import { useState } from "react"
 
-function App() {
+function CreateWallet() {
   // Or manually specify a host
   const arweave = Arweave.init({
     host: '127.0.0.1',
@@ -32,4 +32,4 @@ function App() {
   );
 }
 
-export default App;
+export default CreateWallet;

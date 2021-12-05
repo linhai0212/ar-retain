@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import CreateWallet from './pages/create_wallet/CreateWallet';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <CreateWallet />
   </React.StrictMode>,
   document.getElementById('root')
 );
