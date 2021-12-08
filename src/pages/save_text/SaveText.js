@@ -59,7 +59,10 @@ function SaveText (props) {
 
                 var response = await arweave.transactions.post(result);
 
-                console.log(response)
+                await testArweave.mine();
+                const statusAfterMine = await arweave.transactions.getStatus(result.id)
+                console.log(statusAfterMine); // this will return 200
+
                 // if (response.status == 200) {
                 //     document.write("Puzzle submitted successfully. It should appear within 2-4 minutes on the <a href='index.html'>puzzles list</a>")
                 // } else {
