@@ -17,3 +17,7 @@
 ## Test info.
 * Add balance: http://localhost:1984/mint/SHL61GkE1NuDNTbuWPVr5boiBTBkmS-GJtxM3P6XIDg/100000000000000
 * Get balance: http://127.0.0.1:1984/wallet/SHL61GkE1NuDNTbuWPVr5boiBTBkmS-GJtxM3P6XIDg/balance
+
+## Check node info:
+* http://localhost:1984/info
+* 

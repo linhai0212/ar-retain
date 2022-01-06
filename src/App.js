@@ -4,6 +4,7 @@ import TestWeave from 'testweave-sdk';
 import CreateWallet from './pages/create_wallet/CreateWallet';
 import SaveText from "./pages/save_text/SaveText";
 import {useEffect, useState} from "react";
+import CreatePuzzle from "./pages/create_puzzle/CreatePuzzle";
 
 function App() {
     // Or manually specify a host
@@ -39,6 +40,7 @@ function App() {
     <div>
       Test CreateWallet <CreateWallet arweave={arweave} />
       Test SaveText <SaveText arweave={arweave} key_json={key_json} />
+      <CreatePuzzle arweave={arweave} key_json={key_json} />
     </div>
 
   );

@@ -69,13 +69,6 @@ function SaveText (props) {
                 //     document.write(`Internal error (error code ${response.status}) <a href='index.html'>Click here to go back to the puzzles list</a>`)
                 // }
             })
-
-
-
-
-
-
-
         }
     }
 
