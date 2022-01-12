@@ -20,4 +20,8 @@
 
 ## Check node info:
 * http://localhost:1984/info
-* 
+
+## On polkadot loading err:
+* ref: https://www.valentinog.com/blog/webpack/#how-to-set-up-react-webpack-5-and-babel-from-scratch
+* yarn add @babel/core babel-loader @babel/preset-env @babel/preset-react
+* configure babel to use the React preset in babel.config.json:
