@@ -7,12 +7,19 @@ import TestWeave from "testweave-sdk";
 import MakeAnswerSha256WithSimple from "../../units/MakeAnswerSha256";
 import CommitPuzzle from "./CommitPuzzleToChain";
 
+
 function CreatePuzzle (props) {
 
     let [current_address, setCurrentAddress] = useState('None')
     let [current_balance, setCurrentBalance] = useState('0')
     let [arweave_puzzle_hash, setArweavePuzzleHash] = useState('--')
     let [arweave_answer_hash, setArweaveAnswerHash] = useState('--')
+    let [atocha_deposit_balance, setAtochaDepositBalance] = useState(get_balance(0))
+
+
+    function get_balance(amount) {
+        return amount
+    }
 
     useEffect(()=> {
         if (props.arweave) {
@@ -42,9 +49,9 @@ function CreatePuzzle (props) {
         let puzzle_title = document.getElementById('puzzle_title').value
         let puzzle_content = document.getElementById('puzzle_content').value
         let puzzle_answer = document.getElementById('puzzle_answer').value
-        let puzzle_explain = document.getElementById('puzzle_explain').value
+        let deposit_balance = document.getElementById('deposit_balance').value
 
-        console.log("Save puzzle to arweave.", puzzle_title, puzzle_content, puzzle_answer, puzzle_explain)
+        console.log("Save puzzle to arweave.", puzzle_title, puzzle_content, puzzle_answer, deposit_balance)
 
         if (props.arweave) {
             let arweave = props.arweave
@@ -54,7 +61,6 @@ function CreatePuzzle (props) {
                 let to_json = {}
                 to_json.puzzle_title = puzzle_title
                 to_json.puzzle_content = puzzle_content
-                to_json.puzzle_explain = puzzle_explain
                 console.log("Will save json : ", JSON.stringify(to_json))
 
                 let result = await arweave.createTransaction({
@@ -78,6 +84,7 @@ function CreatePuzzle (props) {
                     setArweavePuzzleHash(result.id)
                     let answer_hash = MakeAnswerSha256WithSimple(puzzle_answer, result.id)
                     setArweaveAnswerHash(answer_hash)
+                    setAtochaDepositBalance(get_balance(deposit_balance))
                 }
           })
         }
@@ -85,10 +92,10 @@ function CreatePuzzle (props) {
 
     return (
         <div>
-            <h2>** Create Puzzle with Arweave ** </h2>
+            <h2>** Setup 1 : Create Puzzle with Arweave ** </h2>
             <div>
-                <div>Current Address : {current_address}</div>
-                <div>Current balance : {current_balance}</div>
+                <div>AR Address : {current_address}</div>
+                <div>It balance : {current_balance}</div>
                 <form action='#'>
                     <div>
                         <div>Puzzle title:</div>
@@ -98,7 +105,7 @@ function CreatePuzzle (props) {
                         <div>Answer text:</div>
                         <textarea id='puzzle_answer'></textarea>
                         <div>Puzzle explain: (Option)</div>
-                        <textarea id='puzzle_explain'></textarea>
+                        <input id='deposit_balance' value='1000'></input> ATO
                     </div>
                     <div>
                         <button onClick={saveContent}>
@@ -111,12 +118,15 @@ function CreatePuzzle (props) {
                         Puzzle hash: <a href={"http://localhost:1984/"+arweave_puzzle_hash}>{arweave_puzzle_hash} </a>
                     </div>
                     <div>Answer hash: {arweave_answer_hash}</div>
-                    <div>
-                        <CommitPuzzle puzzle_hash={arweave_puzzle_hash} answer_hash={arweave_answer_hash}/>
-                    </div>
                 </div>
             </div>
+            <CommitPuzzle
+                puzzle_hash={arweave_puzzle_hash}
+                answer_hash={arweave_answer_hash}
+                deposit_balance={atocha_deposit_balance.toString()}
+            />
         </div>
+
     );
 }
 
