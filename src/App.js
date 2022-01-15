@@ -13,7 +13,8 @@ function App() {
     //     port: 1984,
     //     protocol: 'http'
     // });
-    let a = BigInt(10)
+    // let a = BigInt(10)
+    // console.log("BIG int = ", a)
     let [arweave, setArWeave] = useState(null)
     useEffect( () => {
         let arweave = Arweave.init({

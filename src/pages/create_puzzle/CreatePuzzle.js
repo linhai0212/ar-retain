@@ -31,9 +31,10 @@ function CreatePuzzle (props) {
 
                 // Old code is props.key_json
                 arweave.wallets.jwkToAddress(testArweave.rootJWK).then((addr) => {
-                    console.log('jwk to address:', addr);
+                    console.log('jwk to address:', addr, arweave.wallets);
                     setCurrentAddress(addr)
                     arweave.wallets.getBalance(addr).then((bal) => {
+                        console.log('bal: ', bal)
                         const balance = arweave.ar.winstonToAr(bal)
                         console.log('get balance: ', balance)
                         setCurrentBalance(balance)

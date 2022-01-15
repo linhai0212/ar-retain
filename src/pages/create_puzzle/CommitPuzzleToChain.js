@@ -28,7 +28,7 @@ function CommitPuzzle (props) {
         console.log('bob address: ', acc_bob.address)
 
         const decimals = api.registry.chainDecimals;
-        const balance_amount = BigInt(props.deposit_balance * (18 ** decimals))
+        const balance_amount = 10000 // BigInt(props.deposit_balance * (18 ** decimals))
 
         // atochaModule create_puzzle (puzzlehash,answerhash,amount,version)
         console.log(props.puzzle_hash, props.answer_hash, props.deposit_balance, 1)
